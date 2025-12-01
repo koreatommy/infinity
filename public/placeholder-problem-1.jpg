@@ -1,0 +1,24 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="600" fill="#F3F4F6"/>
+<rect x="100" y="100" width="600" height="400" rx="12" fill="#2E8B57"/>
+<line x1="120" y1="150" x2="680" y2="150" stroke="white" stroke-width="2"/>
+<line x1="120" y1="200" x2="680" y2="200" stroke="white" stroke-width="2"/>
+<line x1="120" y1="250" x2="680" y2="250" stroke="white" stroke-width="2"/>
+<line x1="120" y1="300" x2="680" y2="300" stroke="white" stroke-width="2"/>
+<line x1="120" y1="350" x2="680" y2="350" stroke="white" stroke-width="2"/>
+<line x1="120" y1="400" x2="680" y2="400" stroke="white" stroke-width="2"/>
+<line x1="120" y1="450" x2="680" y2="450" stroke="white" stroke-width="2"/>
+
+<rect x="150" y="170" width="200" height="100" rx="8" fill="#FFFBEB"/>
+<text x="160" y="200" font-family="sans-serif" font-size="14">수행평가 공지</text>
+<text x="160" y="220" font-family="sans-serif" font-size="12" fill="#78716C">- 국어: 시 감상문</text>
+<text x="160" y="235" font-family="sans-serif" font-size="12" fill="#78716C">- 마감: 9/23</text>
+
+<rect x="450" y="320" width="200" height="100" rx="8" fill="#FFFBEB"/>
+<text x="460" y="350" font-family="sans-serif" font-size="14">준비물 안내 (변경)</text>
+<text x="460" y="370" font-family="sans-serif" font-size="12" fill="#D97706"><strike>검은색 펜</strike> -> 파란색 펜</text>
+
+<path d="M 700 120 L 720 100 L 700 80 Z" fill="#F87171"/>
+<text x="650" y="90" font-family="sans-serif" font-size="14" fill="#B91C1C">누락!</text>
+
+</svg>
