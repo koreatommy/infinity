@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import { useToast } from "@/hooks/use-toast";
+import { handleLinkClick } from "@/lib/link-validator";
 
 const navLinks = [
   { href: "#home", label: "홈" },
@@ -19,6 +21,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     setMounted(true);
@@ -42,6 +45,27 @@ export default function Header() {
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
+      });
+    }
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>, href?: string) => {
+    if (href) {
+      const isValid = handleLinkClick(e, href, () => {
+        toast({
+          title: "서비스 준비중입니다",
+          description: "곧 만나볼 수 있습니다.",
+          variant: "default",
+        });
+      });
+      if (!isValid) return;
+    } else {
+      // href가 없는 버튼은 준비중 메시지 표시
+      e.preventDefault();
+      toast({
+        title: "서비스 준비중입니다",
+        description: "곧 만나볼 수 있습니다.",
+        variant: "default",
       });
     }
   };
@@ -94,10 +118,20 @@ export default function Header() {
                 <span className="sr-only">다크모드 토글</span>
               </Button>
             )}
-            <Button variant="outline" size="sm" className="border-primary/20 hover:bg-primary/5 hover:text-primary">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="border-primary/20 hover:bg-primary/5 hover:text-primary"
+              onClick={(e) => handleButtonClick(e)}
+            >
               앱 다운로드
             </Button>
-            <Button size="sm">교사용 시작하기</Button>
+            <Button 
+              size="sm"
+              onClick={(e) => handleButtonClick(e)}
+            >
+              교사용 시작하기
+            </Button>
           </div>
           <div className="md:hidden flex items-center space-x-4">
             {mounted && (
@@ -137,8 +171,19 @@ export default function Header() {
               </a>
             ))}
             <div className="pt-4 pb-2 border-t border-border/50 flex flex-col space-y-2">
-                <Button variant="outline" className="w-full justify-center">앱 다운로드</Button>
-                <Button className="w-full justify-center">교사용 시작하기</Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-center"
+                  onClick={(e) => handleButtonClick(e)}
+                >
+                  앱 다운로드
+                </Button>
+                <Button 
+                  className="w-full justify-center"
+                  onClick={(e) => handleButtonClick(e)}
+                >
+                  교사용 시작하기
+                </Button>
             </div>
           </div>
         </div>

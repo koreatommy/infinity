@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const stats = [
   { label: "사용 학교", value: "150+", icon: "🏫" },
@@ -19,6 +20,17 @@ const benefits = [
 ];
 
 export default function CtaSection() {
+  const { toast } = useToast();
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toast({
+      title: "서비스 준비중입니다",
+      description: "곧 만나볼 수 있습니다.",
+      variant: "default",
+    });
+  };
+
   return (
     <section id="cta" className="py-24 md:py-32 bg-primary relative overflow-hidden">
       {/* 배경 패턴 - CSS Grid */}
@@ -64,11 +76,21 @@ export default function CtaSection() {
 
           {/* CTA 버튼 */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-6 h-auto font-bold shadow-xl hover:scale-105 transition-transform w-full sm:w-auto">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="text-lg px-8 py-6 h-auto font-bold shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
+              onClick={handleButtonClick}
+            >
               <Download className="mr-2 h-5 w-5" />
               앱 다운로드
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 h-auto bg-transparent border-white text-white hover:bg-white/10 hover:text-white w-full sm:w-auto">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-6 h-auto bg-transparent border-white text-white hover:bg-white/10 hover:text-white w-full sm:w-auto"
+              onClick={handleButtonClick}
+            >
               교사용 시작하기
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

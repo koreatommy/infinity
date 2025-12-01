@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Bell, CheckCircle2, FileText, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
 
 const quickStats = [
   { icon: <Calendar className="h-5 w-5" />, label: "자동 캘린더", value: "100%" },
@@ -12,6 +13,17 @@ const quickStats = [
 ];
 
 export default function HeroSection() {
+  const { toast } = useToast();
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toast({
+      title: "서비스 준비중입니다",
+      description: "곧 만나볼 수 있습니다.",
+      variant: "default",
+    });
+  };
+
   return (
     <section id="home" className="pt-32 md:pt-40 pb-20 bg-gradient-to-br from-background via-background to-primary/5 dark:from-background dark:via-background dark:to-primary/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -55,10 +67,19 @@ export default function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-in fade-in slide-in-from-bottom-9 duration-700 delay-500">
-              <Button size="lg" className="text-lg px-8 h-12 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 h-12 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5"
+                onClick={handleButtonClick}
+              >
                 지금 시작하기
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 h-12 border-primary/20 hover:bg-primary/5 text-foreground">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 h-12 border-primary/20 hover:bg-primary/5 text-foreground"
+                onClick={handleButtonClick}
+              >
                 기능 소개 보기
               </Button>
             </div>

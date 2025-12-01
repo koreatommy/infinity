@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Github } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { handleLinkClick } from "@/lib/link-validator";
 
 const footerLinks = {
   서비스: [
@@ -25,6 +27,36 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const { toast } = useToast();
+
+  const handleLinkValidation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // 앵커 링크는 기본 동작 허용
+    if (href.startsWith('#')) {
+      return;
+    }
+
+    const isValid = handleLinkClick(e, href, () => {
+      toast({
+        title: "서비스 준비중입니다",
+        description: "곧 만나볼 수 있습니다.",
+        variant: "default",
+      });
+    });
+
+    if (!isValid) {
+      return;
+    }
+  };
+
+  const handleSocialButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toast({
+      title: "서비스 준비중입니다",
+      description: "곧 만나볼 수 있습니다.",
+      variant: "default",
+    });
+  };
+
   return (
     <footer id="contact" className="bg-slate-950 text-slate-300 border-t border-slate-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -43,19 +75,19 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center">
                   <Mail className="h-4 w-4" />
                 </div>
-                <span>contact@muhansuhaeng.kr</span>
+                <span>lisciencelip@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center">
                   <Phone className="h-4 w-4" />
                 </div>
-                <span>02-1234-5678</span>
+                <span>0010-8227-1730</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center">
                   <MapPin className="h-4 w-4" />
                 </div>
-                <span>하남교육재단</span>
+                <span>립사이언스</span>
               </div>
             </div>
           </div>
@@ -69,6 +101,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={(e) => handleLinkValidation(e, link.href)}
                       className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center gap-2 group"
                     >
                       <span className="w-1 h-1 rounded-full bg-slate-600 group-hover:bg-primary transition-colors" />
@@ -90,7 +123,13 @@ export default function Footer() {
           </p>
           <div className="flex gap-4">
             {[Facebook, Instagram, Twitter, Github].map((Icon, index) => (
-              <Button key={index} variant="ghost" size="icon" className="text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-colors">
+              <Button 
+                key={index} 
+                variant="ghost" 
+                size="icon" 
+                className="text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-colors"
+                onClick={handleSocialButtonClick}
+              >
                 <Icon className="h-5 w-5" />
               </Button>
             ))}
