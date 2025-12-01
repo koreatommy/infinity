@@ -63,7 +63,7 @@ export default function Header() {
               onClick={(e) => handleNavClick(e, "#home")}
               className="text-2xl font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity"
             >
-              무한수행
+              하남교육재단 무한수행 팀
             </a>
           </div>
           <nav className="hidden md:flex md:items-center md:space-x-8">
